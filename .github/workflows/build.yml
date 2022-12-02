@@ -26,7 +26,8 @@ jobs:
         id: build_image
         uses: redhat-actions/buildah-build@v2
         with:
-          containerfiles: [Dockerfile]
+          containerfiles: |
+            ./Dockerfile
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAGS }}
           oci: true
