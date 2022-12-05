@@ -6,7 +6,7 @@ set -eu
 /usr/bin/flatpak remote-modify --enable flathub
 /usr/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 /usr/bin/flatpak remote-delete fedora --force
-/usr/bin/flatpak install --assumeyes --noninteractive --or-update \\
+/usr/bin/flatpak install --assumeyes --noninteractive --or-update \
 org.gnome.DejaDup \
 org.gnome.Rhythmbox3 \
 org.gnome.Shotwell \
