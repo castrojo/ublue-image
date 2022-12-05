@@ -4,7 +4,7 @@ FROM ghcr.io/cgwalters/fedora-silverblue:37
 COPY etc /etc
 
 # I can't get this to work right
-# COPY var /var
+COPY ublue-init.sh /usr/local/bin
 
 RUN rpm-ostree override remove firefox firefox-langpacks && \
     rpm-ostree install gnome-shell-extension-appindicator gnome-shell-extension-dash-to-dock distrobox gnome-tweaks && \
