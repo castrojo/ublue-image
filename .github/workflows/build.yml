@@ -1,6 +1,6 @@
 name: build-ublue
 on:
-  push:
+# push:
   schedule:
     - cron: '0 0 * * *'  # every day at midnight
 env:
