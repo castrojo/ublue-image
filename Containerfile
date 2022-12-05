@@ -9,8 +9,6 @@ RUN rpm-ostree override remove firefox firefox-langpacks && \
     sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf && \
     systemctl enable rpm-ostreed-automatic.timer && \
     systemctl enable flatpak-automatic.timer && \
-    dconf write /org/gnome/shell/disable-extension-version-validation "true" && \
-    dconf write /org/gnome/shell/disable-user-extensions "false" && \
     gnome-extensions enable appindicatorsupport@rgcjonas.gmail.com && \
     gnome-extensions disable background-logo@fedorahosted.org && \
     gnome-extensions enable dash-to-dock@micxgx.gmail.com && \
