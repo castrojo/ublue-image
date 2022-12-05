@@ -4,7 +4,7 @@ FROM ghcr.io/cgwalters/fedora-silverblue:37
 COPY etc /etc
 
 RUN rpm-ostree override remove firefox firefox-langpacks && \
-    rpm-ostree install gnome-shell-extension-appindicator gnome-shell-extension-dash-to-dock distrobox && \
+    rpm-ostree install gnome-shell-extension-appindicator gnome-shell-extension-dash-to-dock distrobox gnome-tweaks && \
     rpm-ostree cleanup -m && \
     sed -i 's/#AutomaticUpdatePolicy.*/AutomaticUpdatePolicy=stage/' /etc/rpm-ostreed.conf && \
     systemctl enable rpm-ostreed-automatic.timer && \
