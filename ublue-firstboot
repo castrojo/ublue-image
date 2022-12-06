@@ -65,7 +65,7 @@ echo "# Installing GNOME Core Tools"
         org.gnome.baobab \
         org.gnome.clocks \
         org.gnome.eog \
-        org.gnome.font-viewer  
+        org.gnome.font-viewer
 if [ "$?" != 0 ] ; then
         zenity --error \
           --text="Installing Calculator Failed"
@@ -128,7 +128,7 @@ fi
 echo "100"
 
 echo "# Reticulating Final Splines"
-rm ~/.config/autostart/ublue-firstboot.desktop
+touch ~/.config/ublue/firstboot-done
 ) |
         zenity --progress --title="uBlue Desktop Firstboot" --percentage=0 --auto-close --no-cancel --width=300
 
