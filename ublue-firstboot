@@ -2,7 +2,7 @@
 (
 echo "# Waiting for Internet connection"
 until /usr/bin/ping -q -c 1 flathub.org; do sleep 1; done
-echo "05"
+echo "00"
 
 echo "# Unfiltering Flathub Repository"
 /usr/bin/flatpak remote-modify --enable flathub ||:
@@ -11,7 +11,7 @@ if [ "$?" != 0 ] ; then
           --text="Unfiltering Flathub Repo Failed"
         exit 1
 fi
-echo "10"
+echo "3"
 
 echo "# Enabling Flathub Repository"
 /usr/bin/flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -20,7 +20,7 @@ if [ "$?" != 0 ] ; then
           --text="Adding Flathub Repo Failed"
         exit 1
 fi
-echo "12"
+echo "5"
 
 echo "# Removing Fedora Flatpak Repository"
 /usr/bin/flatpak remote-delete fedora --force ||:
@@ -29,7 +29,7 @@ if [ "$?" != 0 ] ; then
           --text="Removing Fedora Flatpak Repo Failed"
         exit 1
 fi
-echo "15"
+echo "7"
 
 echo "# Installing Firefox"
 /usr/bin/flatpak install --user --noninteractive flathub org.mozilla.firefox
@@ -38,7 +38,7 @@ if [ "$?" != 0 ] ; then
           --text="Installing Firefox Failed"
         exit 1
 fi
-echo "20"
+echo "10"
 
 echo "# Installing Thunderbird"
 /usr/bin/flatpak install --user --noninteractive flathub org.mozilla.Thunderbird
@@ -47,10 +47,11 @@ if [ "$?" != 0 ] ; then
           --text="Installing Thunderbird Failed"
         exit 1
 fi
-echo "30"
+echo "20"
 
-echo "# Installing GNOME Core Tools"
-/usr/bin/flatpak install --user --noninteractive flathub org.gnome.Calculator \
+echo "# Installing GNOME Applications"
+/usr/bin/flatpak install --user --noninteractive flathub \
+        org.gnome.Calculator \
         org.gnome.Calendar \
         org.gnome.Characters \
         org.gnome.Connections \
@@ -58,6 +59,15 @@ echo "# Installing GNOME Core Tools"
         org.gnome.Evince \
         org.gnome.Firmware \
         org.gnome.Logs \
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing GNOME Applications Failed"
+        exit 1
+fi
+echo "30"
+
+echo "# Installing more GNOME Applications"
+/usr/bin/flatpak install --user --noninteractive flathub \
         org.gnome.Maps \
         org.gnome.NautilusPreviewer \
         org.gnome.TextEditor \
@@ -68,10 +78,10 @@ echo "# Installing GNOME Core Tools"
         org.gnome.font-viewer  
 if [ "$?" != 0 ] ; then
         zenity --error \
-          --text="Installing Calculator Failed"
+          --text="Installing GNOME more Applications Failed"
         exit 1
 fi
-echo "50"
+echo "40"
 
 echo "# Installing Extension Manager"
 /usr/bin/flatpak install --user --noninteractive flathub com.mattjakeman.ExtensionManager
@@ -80,7 +90,7 @@ if [ "$?" != 0 ] ; then
           --text="Installing Extension Manager Failed"
         exit 1
 fi
-echo "55"
+echo "50"
 
 echo "# Installing LibreOffice"
 /usr/bin/flatpak install --user --noninteractive flathub org.libreoffice.LibreOffice
@@ -89,7 +99,7 @@ if [ "$?" != 0 ] ; then
           --text="Installing LibreOffice Failed"
         exit 1
 fi
-echo "80"
+echo "70"
 
 echo "# Installing DejaDup Backup"
 /usr/bin/flatpak install --user --noninteractive flathub org.gnome.DejaDup
@@ -98,7 +108,7 @@ if [ "$?" != 0 ] ; then
           --text="Installing DejaDup Failed"
         exit 1
 fi
-echo "85"
+echo "80"
 
 echo "# Installing Font Downloader"
 /usr/bin/flatpak install --user --noninteractive flathub org.gustavoperedo.FontDownloader
@@ -107,7 +117,7 @@ if [ "$?" != 0 ] ; then
           --text="Installing FontDownloader Failed"
         exit 1
 fi
-echo "90"
+echo "85"
 
 echo "# Installing Flatseal"
 /usr/bin/flatpak install --user --noninteractive flathub com.github.tchx84.Flatseal
@@ -116,13 +126,13 @@ if [ "$?" != 0 ] ; then
           --text="Installing Flatseal Failed"
         exit 1
 fi
-echo "95"
+echo "90"
 
 echo "# Installing Celluloid Media Player"
 /usr/bin/flatpak install --user --noninteractive flathub io.github.celluloid_player.Celluloid
 if [ "$?" != 0 ] ; then
         zenity --error \
-          --text="Installing Flatseal Failed"
+          --text="Installing Celluloid Failed"
         exit 1
 fi
 echo "100"
@@ -130,7 +140,7 @@ echo "100"
 echo "# Reticulating Final Splines"
 rm ~/.config/autostart/ublue-firstboot.desktop
 ) |
-        zenity --progress --title="uBlue Desktop Firstboot" --percentage=0 --auto-close --no-cancel --width=300
+        zenity --progress --title="Welcome to uBlue" --percentage=0 --auto-close --no-cancel --width=300
 
 if [ "$?" != 0 ] ; then
         zenity --error \
