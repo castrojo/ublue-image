@@ -1,4 +1,10 @@
 #!/bin/sh
+
+if test -e "$HOME"/.config/ublue/firstboot-done; then
+    echo "Already ran"
+    exit 0
+fi
+
 (
 echo "# Waiting for Internet connection"
 until /usr/bin/ping -q -c 1 flathub.org; do sleep 1; done
@@ -128,7 +134,8 @@ fi
 echo "100"
 
 echo "# Reticulating Final Splines"
-touch ~/.config/ublue/firstboot-done
+mkdir -p "$HOME"/.config/ublue/
+touch "$HOME"/.config/ublue/firstboot-done
 ) |
         zenity --progress --title="uBlue Desktop Firstboot" --percentage=0 --auto-close --no-cancel --width=300
 
