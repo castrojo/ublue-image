@@ -1,0 +1,138 @@
+#!/bin/sh
+(
+echo "# Waiting for Internet connection"
+until /usr/bin/ping -q -c 1 flathub.org; do sleep 1; done
+echo "05"
+
+echo "# Unfiltering Flathub Repository"
+/usr/bin/flatpak remote-modify --enable flathub
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Unfiltering Flathub Repo Failed"
+        exit 1
+fi
+echo "10"
+
+echo "# Enabling Flathub Repository"
+/usr/bin/flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Adding Flathub Repo Failed"
+        exit 1
+fi
+echo "12"
+
+echo "# Removing Fedora Flatpak Repository"
+/usr/bin/flatpak remote-delete fedora --force ||:
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Removing Fedora Flatpak Repo Failed"
+        exit 1
+fi
+echo "15"
+
+echo "# Installing Firefox"
+/usr/bin/flatpak install --user --noninteractive flathub org.mozilla.firefox
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing Firefox Failed"
+        exit 1
+fi
+echo "20"
+
+echo "# Installing Thunderbird"
+/usr/bin/flatpak install --user --noninteractive flathub org.mozilla.Thunderbird
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing Thunderbird Failed"
+        exit 1
+fi
+echo "30"
+
+echo "# Installing GNOME Core Tools"
+/usr/bin/flatpak install --user --noninteractive flathub org.gnome.Calculator \
+        org.gnome.Calendar \
+        org.gnome.Characters \
+        org.gnome.Connections \
+        org.gnome.Contacts \
+        org.gnome.Evince \
+        org.gnome.Firmware \
+        org.gnome.Logs \
+        org.gnome.Maps \
+        org.gnome.NautilusPreviewer \
+        org.gnome.TextEditor \
+        org.gnome.Weather \
+        org.gnome.baobab \
+        org.gnome.clocks \
+        org.gnome.eog \
+        org.gnome.font-viewer  
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing Calculator Failed"
+        exit 1
+fi
+echo "50"
+
+echo "# Installing Extension Manager"
+/usr/bin/flatpak install --user --noninteractive flathub com.mattjakeman.ExtensionManager
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing Extension Manager Failed"
+        exit 1
+fi
+echo "55"
+
+echo "# Installing LibreOffice"
+/usr/bin/flatpak install --user --noninteractive flathub org.libreoffice.LibreOffice
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing LibreOffice Failed"
+        exit 1
+fi
+echo "80"
+
+echo "# Installing DejaDup Backup"
+/usr/bin/flatpak install --user --noninteractive flathub org.gnome.DejaDup
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing DejaDup Failed"
+        exit 1
+fi
+echo "85"
+
+echo "# Installing Font Downloader"
+/usr/bin/flatpak install --user --noninteractive flathub org.gustavoperedo.FontDownloader
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing FontDownloader Failed"
+        exit 1
+fi
+echo "90"
+
+echo "# Installing Flatseal"
+/usr/bin/flatpak install --user --noninteractive flathub com.github.tchx84.Flatseal
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing Flatseal Failed"
+        exit 1
+fi
+echo "95"
+
+echo "# Installing Celluloid Media Player"
+/usr/bin/flatpak install --user --noninteractive flathub io.github.celluloid_player.Celluloid
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Installing Flatseal Failed"
+        exit 1
+fi
+echo "100"
+
+echo "# Reticulating Final Splines"
+rm ~/.config/autostart/ublue-firstboot.desktop
+) |
+        zenity --progress --title="uBlue Desktop Firstboot" --percentage=0 --auto-close --no-cancel --width=300
+
+if [ "$?" != 0 ] ; then
+        zenity --error \
+          --text="Firstboot Configuration Error"
+fi
