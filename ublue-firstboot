@@ -64,7 +64,7 @@ echo "# Installing GNOME Applications"
         org.gnome.Contacts \
         org.gnome.Evince \
         org.gnome.Firmware \
-        org.gnome.Logs \
+        org.gnome.Logs 
 if [ "$?" != 0 ] ; then
         zenity --error \
           --text="Installing GNOME Applications Failed"
