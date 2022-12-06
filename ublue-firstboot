@@ -10,11 +10,11 @@ echo "# Waiting for Internet connection"
 until /usr/bin/ping -q -c 1 flathub.org; do sleep 1; done
 echo "00"
 
-echo "# Unfiltering Flathub Repository"
-/usr/bin/flatpak remote-modify --enable flathub ||:
+echo "# Removing Filtered Flathub Repository"
+/usr/bin/flatpak remote-delete flathub --force ||:
 if [ "$?" != 0 ] ; then
         zenity --error \
-          --text="Unfiltering Flathub Repo Failed"
+          --text="Removing Filtered Flatpak Repo Failed"
         exit 1
 fi
 echo "3"
