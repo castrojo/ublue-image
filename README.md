@@ -8,39 +8,46 @@ This is a containerized version of [ublue](https://ublue.it) utilizing the lates
 
 # Usage
 
-WARNING: This is still experimental.
+WARNING: This is still experimental. You should have Fedora Silverblue 37 already installed:
 
     sudo rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/castrojo/ublue-image:latest
 
 # Features
 
-This is intended to be an example of how you can derive custom OCI images of your operating system, built out of git and then pushed to a registry. This image is then splatted onto your disk, therefore eliminating the risk of you mangling repos or having to reset before upgrades. Silverblue but pushed even more into cloud native land. 
+This is intended to be an example of how you can derive custom OCI images of your operating system, built out of git and then pushed to a registry.
+This image is then splatted onto your disk, therefore eliminating the risk of you mangling repos or having to reset before upgrades. 
+Imagine Silverblue but pushed even more into cloud-native land and I'm the conductor, honk honk. 
 
 ### Changes from stock Silverblue
 
-- Starts with a base Fedora Silverblue 37 image
+- Start with a base Fedora Silverblue 37 image
 - Removes Firefox from the base image
-- Adds distrobox and gnome-tweaks to the base image
-- Adds two GNOME extensions, Dash to Dock and Appindicator extensions to the base image
-- Sets automatic updates of the system 
+- Adds the following packages to the base image:
+  - distrobox and gnome-tweaks
+  - Dash to Dock and Appindicator GNOME Extensions
+- Sets automatic staging of updates for the system 
 - Sets flatpaks to update twice a day
 
 ### Applications
 
-Similar to openSUSE MicroOS this will install all the stock applications with the `--user` flag from Flathub:
 - Mozilla Firefox, Mozilla Thunderbird, Extension Manager, Libreoffice, DejaDup, FontDownloader, Flatseal, and the Celluloid Media Player
-- GNOME Calculator, Calendar, Characters, Connections, Contacts, Evince, Firmware, Logs, Maps, NautilusPreviewer, TextEditor, Weather, baobab, clocks, eog, and font-viewer
-- Thanks for the inspiration Team Green!
+- Core GNOME Applications installed from Flathub
+  - GNOME Calculator, Calendar, Characters, Connections, Contacts, Evince, Firmware, Logs, Maps, NautilusPreviewer, TextEditor, Weather, baobab, clocks, eog, and font-viewer
+- All applications installed per user instead of system wide, similar to openSUSE MicroOS. Thanks for the inspiration Team Green!
 
 ### Choose Team Blue or Team Orange
 
 ![image](https://user-images.githubusercontent.com/1264109/205803912-cbce5490-762f-4674-8fc1-8cb498884dfa.png)
 
 After installation is finished you can either keep the normal Fedora desktop, or choose a subset of Ubuntu's desktop layout.
+Personally I prefer the Ubuntu desktop on my desktops and laptops but upstream GNOME on my tablet and 2-and-1. 
+Go figure.
 
 ## Other Details
 
-Images are built here once a day and when changes are pushed to this repo. I'll adjust this based on what Fedora does image-publication wise so we're nice and efficient. 
+Images are built here once a day and when changes are pushed to this repo.
+As the Fedora Silverblue images update those changes will propogate to you via this image automatically.
+I'll adjust this based on what Fedora does image publication wise so we're nice and efficient.
 
 ## Frequently Asked Questions
 
@@ -62,4 +69,4 @@ I chose the wrong desktop, how do I rerun the initial wizard thing?
 
 Should I trust you?
 
-> This is all hosted, built, and pushed on GitHub. As far as if I'm a trustable fellow, here's my [bio](https://www.ypsidanger.com/about/). If you've made it this far then hopefully you've come to the conclusion on how easy it would be to build all of this on your own trusted machinery. :smile: 
+> This is all hosted, built, and pushed on GitHub. As far as if I'm a trustable fellow, here's my [bio](https://www.ypsidanger.com/about/). If you've made it this far then hopefully you've come to the conclusion on how easy it would be to build all of this on your own trusted machinery. :smile:
