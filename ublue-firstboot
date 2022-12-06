@@ -5,7 +5,7 @@ until /usr/bin/ping -q -c 1 flathub.org; do sleep 1; done
 echo "05"
 
 echo "# Unfiltering Flathub Repository"
-/usr/bin/flatpak remote-modify --enable flathub
+/usr/bin/flatpak remote-modify --enable flathub ||:
 if [ "$?" != 0 ] ; then
         zenity --error \
           --text="Unfiltering Flathub Repo Failed"
