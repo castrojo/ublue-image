@@ -1,4 +1,10 @@
 #!/bin/sh
+
+if test -e "$HOME"/.config/ublue/firstboot-done; then
+    echo "Already ran"
+    exit 0
+fi
+
 (
 echo "# Waiting for Internet connection"
 until /usr/bin/ping -q -c 1 flathub.org; do sleep 1; done
@@ -75,7 +81,7 @@ echo "# Installing more GNOME Applications"
         org.gnome.baobab \
         org.gnome.clocks \
         org.gnome.eog \
-        org.gnome.font-viewer  
+        org.gnome.font-viewer
 if [ "$?" != 0 ] ; then
         zenity --error \
           --text="Installing GNOME more Applications Failed"
@@ -138,7 +144,8 @@ fi
 echo "100"
 
 echo "# Reticulating Final Splines"
-rm ~/.config/autostart/ublue-firstboot.desktop
+mkdir -p "$HOME"/.config/ublue/
+touch "$HOME"/.config/ublue/firstboot-done
 ) |
         zenity --progress --title="Welcome to uBlue" --percentage=0 --auto-close --no-cancel --width=400
         zenity --question --title= "Transform desktop?" --text "Keep desktop layout like Fedora or switch it to Ubuntu?" --ok-label "Ubuntu" --cancel-label "Fedora"
