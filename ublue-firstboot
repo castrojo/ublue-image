@@ -140,7 +140,14 @@ echo "100"
 echo "# Reticulating Final Splines"
 rm ~/.config/autostart/ublue-firstboot.desktop
 ) |
-        zenity --progress --title="Welcome to uBlue" --percentage=0 --auto-close --no-cancel --width=300
+        zenity --progress --title="Welcome to uBlue" --percentage=0 --auto-close --no-cancel --width=400
+        zenity --question --title= "Transform desktop?" --text "Keep desktop layout like Fedora or switch it to Ubuntu?" --ok-label "Ubuntu" --cancel-label "Fedora"
+        ret=$?
+        if ((ret==0)); then
+           echo "Ubuntu"
+        else
+           echo "Fedora"
+fi
 
 if [ "$?" != 0 ] ; then
         zenity --error \
