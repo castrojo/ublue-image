@@ -14,7 +14,7 @@ echo "# Removing Filtered Flathub Repository"
 /usr/bin/flatpak remote-delete flathub --force ||:
 if [ "$?" != 0 ] ; then
         zenity --error \
-          --text="Removing Filtered Flatpak Repo Failed"
+          --text="Removing Filtered Flathub Repo Failed"
         exit 1
 fi
 echo "3"
