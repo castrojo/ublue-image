@@ -2,7 +2,7 @@
 [org/gnome/desktop/background]
 
 # dconf key names and their corresponding values
-picture-uri='file:///usr/local/share/backgrounds/lagoon.jpg'
+picture-uri='file:///usr/share/backgrounds/lagoon.jpg'
 picture-options='scaled'
 primary-color='000000'
 secondary-color='FFFFFF'
